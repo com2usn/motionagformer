@@ -2,7 +2,7 @@ tqdm
 easydict
 numpy
 torch
-timm==0.6.11
+timm==0.6.13
 PyYAML
 matplotlib
 wandb

@@ -2,7 +2,8 @@ import argparse
 import os
 
 import numpy as np
-import pkg_resources
+import importlib.metadata
+import uuid
 import torch
 import wandb
 from torch import optim
@@ -269,12 +270,12 @@ def train(args, opts):
     lr_decay = args.lr_decay
     epoch_start = 0
     min_mpjpe = float('inf')  # Used for storing the best model
-    wandb_id = opts.wandb_run_id if opts.wandb_run_id is not None else wandb.util.generate_id()
+    wandb_id = opts.wandb_run_id if opts.wandb_run_id is not None else uuid.uuid4().hex[:8]
 
     if opts.checkpoint:
         checkpoint_path = os.path.join(opts.checkpoint, opts.checkpoint_file if opts.checkpoint_file else "latest_epoch.pth.tr")
         if os.path.exists(checkpoint_path):
-            checkpoint = torch.load(checkpoint_path, map_location=lambda storage, loc: storage)
+            checkpoint = torch.load(checkpoint_path, map_location=lambda storage, loc: storage, weights_only=False)
             model.load_state_dict(checkpoint['model'], strict=True)
 
             if opts.resume:
@@ -304,7 +305,7 @@ def train(args, opts):
                         settings=wandb.Settings(start_method='fork'))
                 wandb.config.update({"run_id": wandb_id})
                 wandb.config.update(args)
-                installed_packages = {d.project_name: d.version for d in pkg_resources.working_set}
+                installed_packages = {d.metadata['Name']: d.version for d in importlib.metadata.distributions()}
                 wandb.config.update({'installed_packages': installed_packages})
 
     checkpoint_path_latest = os.path.join(opts.new_checkpoint, 'latest_epoch.pth.tr')

@@ -54,12 +54,12 @@ After dataset preparation, you can train the model as follows:
 ### Human3.6M
 You can train Human3.6M with the following command:
 ```
-python train.py --config <PATH-TO-CONFIG>
+python train_h36m.py --config <PATH-TO-CONFIG>
 ```
 where config files are located at `configs/h36m`. You can also use [weight and biases](wandb.ai) for logging the training and validation error by adding `--use-wandb` at the end. In case of using it, you can set the name using `--wandb-name`. e.g.:
 
 ```
-python train.py --config configs/h36m/MotionAGFormer-base.yaml --use-wandb --wandb-name MotionAGFormer-base
+python train_h36m.py --config configs/h36m/MotionAGFormer-base.yaml --use-wandb --wandb-name MotionAGFormer-base
 ```
 ### MPI-INF-3DHP
 You can train MPI-INF-3DHP with the following command:
@@ -77,11 +77,11 @@ where config files are located at `configs/mpi`. Like Human3.6M, weight and bias
 
 After downloading the weight from table above, you can evaluate Human3.6M models by:
 ```
-python train.py --eval-only --checkpoint <CHECKPOINT-DIRECTORY> --checkpoint-file <CHECKPOINT-FILE-NAME> --config <PATH-TO-CONFIG>
+python train_h36m.py --eval-only --checkpoint <CHECKPOINT-DIRECTORY> --checkpoint-file <CHECKPOINT-FILE-NAME> --config <PATH-TO-CONFIG>
 ```
 For example if MotionAGFormer-L of H.36M is downloaded and put in `checkpoint` directory, then we can run:
 ```
-python train.py --eval-only --checkpoint checkpoint --checkpoint-file motionagformer-l-h36m.pth.tr --config configs/h36m/MotionAGFormer-large.yaml
+python train_h36m.py --eval-only --checkpoint checkpoint --checkpoint-file motionagformer-l-h36m.pth.tr --config configs/h36m/MotionAGFormer-large.yaml
 ```
 Similarly, MPI-INF-3DHP can be evaluated as follows:
 ```

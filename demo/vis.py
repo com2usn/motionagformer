@@ -204,7 +204,7 @@ def get_pose3D(video_path, output_dir):
     # Put the pretrained model of MotionAGFormer in 'checkpoint/'
     model_path = sorted(glob.glob(os.path.join('checkpoint', 'motionagformer-b-h36m.pth.tr')))[0]
 
-    pre_dict = torch.load(model_path)
+    pre_dict = torch.load(model_path, weights_only=False)
     model.load_state_dict(pre_dict['model'], strict=True)
 
     model.eval()

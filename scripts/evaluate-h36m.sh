@@ -1,1 +1,1 @@
-python train.py --eval-only --checkpoint checkpoint --checkpoint-file motionagformer-l-h36m.pth.tr --config configs/h36m/MotionAGFormer-large.yaml
+python train_h36m.py --eval-only --checkpoint checkpoint --checkpoint-file motionagformer-l-h36m.pth.tr --config configs/h36m/MotionAGFormer-large.yaml

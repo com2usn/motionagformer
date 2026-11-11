@@ -5,3 +5,8 @@ wandb
 checkpoint/*.pth.tr
 data/motion3d/
 data/mpi_inf_3dhp/
+
+__pycache__/
+.claude/    
+.venv/
+data/motion3d

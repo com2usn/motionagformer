@@ -1,1 +1,1 @@
-python train.py --config configs/mpi/MotionAGFormer-large.yaml
+python train_3dhp.py --config configs/mpi/MotionAGFormer-large.yaml
